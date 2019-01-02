@@ -5,15 +5,15 @@ import(
 	_ "github.com/go-sql-driver/mysql"
 )
 type DbWorker struct {
-	Dsn string
+	//Dsn string
 	
 }
 func init() {
-	dbw := DbWorker {
+	/*dbw := DbWorker {
 		Dsn : "root:123456@tcp(localhost:3306)/order",
-	}
+	}*/
 	db,err := sql.Open("mysql",
-	dbw.Dsn)
+	"root:123456@tcp(localhost:3306)/order",)
 	if err != nil {
 		fmt.Println("open database error")
 		panic(err)

@@ -6,7 +6,7 @@ import (
     //"strings"
     "log"
     "html/template"
-    "order_go/projbook/sqlstore"
+    sqlstore "order_go/projbook/sqlstore"
 )
 func OrderList(w http.ResponseWriter,r *http.Request) {
     fmt.Println("OrderList method %s",r.Method);
@@ -29,7 +29,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
            // w.Write("")
            fmt.Println("login success")
            http.Redirect(w, r, "/list", http.StatusFound)
+           dbw := &sqlstore.DbWorker{}
+           dbw.Save("23432234","chenmei",1)
         }
+        
+        
         //fmt.Println("username:", r.PostForm["username"])
         //fmt.Println("password:", r.PostForm["password"])
     }
