@@ -6,7 +6,7 @@ import (
     //"strings"
     "log"
     "html/template"
-    "sqlstore/sql"
+    "order_go/projbook/sqlstore"
 )
 func OrderList(w http.ResponseWriter,r *http.Request) {
     fmt.Println("OrderList method %s",r.Method);
