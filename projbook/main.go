@@ -6,6 +6,7 @@ import (
     //"strings"
     "log"
     "html/template"
+   // "io/ioutil"
     sqlstore "order_go/projbook/sqlstore"
 )
 func OrderList(w http.ResponseWriter,r *http.Request) {
@@ -13,6 +14,12 @@ func OrderList(w http.ResponseWriter,r *http.Request) {
     if r.Method == "GET" {
         t, _ := template.ParseFiles("./views/orderinfo.gtpl")
         t.Execute(w,nil)
+    }else {
+        r.ParseForm()
+        orderId := r.PostForm["orderId"]
+        ordertype := r.PostForm["ordertype"]
+        order_person := r.PostForm["order_person"]
+        fmt.Println("submit body:",orderId,ordertype,order_person)
     }
 }
 func Login(w http.ResponseWriter, r *http.Request) {
