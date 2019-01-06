@@ -26,14 +26,14 @@ func init() {
 	defer db.Close()
 	
 }
-func (dbw *DbWorker) Save(orderid,orderuser string,ordertype int) (err error){
+func (dbw *DbWorker) Save(orderid,orderuser ,ordertype string) (err error){
 	db,err := sql.Open("mysql",
 	"root:12345678@tcp(localhost:3306)/order1")
 	if err != nil {
 		fmt.Println("open database failed")
 	}
 	_,err = db.Exec(
-		"create table orderlist(id int primary key  AUTO_INCREMENT,orderid  varchar(256),ordertype int(8),orderuser varchar(256))")
+		"create table if not exists orderlist(id int primary key  AUTO_INCREMENT,orderid  varchar(256),ordertype varchar(128),orderuser varchar(256))")
 	if err != nil {
 		fmt.Println("create error err",err)
 	}
