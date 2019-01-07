@@ -30,19 +30,12 @@
     <th scope="col">订单提交人</th>
     <th scope="col"><p>提交日前</p></th>
   </tr>
-   <tr>
-    <td> 1111  </td>
-    <td> 22222 </td>
-    <td> 3333vv </td>
-    <td> 44444</td>
-  </tr>
   {{ range .}}
- {{$ orderitem = .orderlist}} 
   <tr>
-    <td> 1111 {{ .order_id }} </td>
-    <td> 22222{{ .order_type }} </td>
-    <td> 3333vv{{ .order_person }} </td>
-    <td> 44444 {{ .order_person }} </td>
+    <td> {{.Order_id }} </td>
+    <td> {{.Order_type }} </td>
+    <td> {{.Order_person}} </td>
+    <td> {{.Order_time }} </td>
   </tr>
   {{ end }}
 </table>

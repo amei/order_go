@@ -9,36 +9,32 @@ import (
    // "io/ioutil"
     //sqlstore "order_go/projbook/sqlstore"
 )
-type orderItem struct {
-    order_id string
-    order_type string
-    order_person string
-    order_time string
+type OrderItem struct {
+    Order_id string
+    Order_type string
+    Order_person string
+    Order_time string
 }
 func OrderList(w http.ResponseWriter,r *http.Request) {
     fmt.Println("OrderList method ",r.Method);
     if r.Method == "GET" {
         t, _ := template.ParseFiles("./views/orderinfo.gtpl")
-       // var orderlist = make(map[string]interface{},1)
-     /* orderlist :=[]orderItem {
-      orderItem{"11111","order_jd","chenmei","20190107"},
-       orderItem{"222222","order_jd","chenmei","20190107"},
-       orderItem{"333333","order_jd","chenmei","20190107"},
-    }*/
-       
-        var orderlist [2]orderItem
-        orderlist[0].order_id="1111111"
-        orderlist[0].order_type="order_jd"
-        orderlist[0].order_person = "chenmei"
-        orderlist[0].order_time = "20190107"
+     
 
-        orderlist[1].order_id="22222222"
-        orderlist[1].order_type="order_jd"
-        orderlist[1].order_person = "chenmei"
-        orderlist[1].order_time = "20190107"
+        Orderlist := [2]OrderItem{}
+        Orderlist[0].Order_id="1111111"
+        Orderlist[0].Order_type="order_jd"
+        Orderlist[0].Order_person = "chenmei"
+        Orderlist[0].Order_time = "20190107"
+
+        Orderlist[1].Order_id="22222222"
+        Orderlist[1].Order_type="order_jd"
+        Orderlist[1].Order_person = "chenmei"
+        Orderlist[1].Order_time = "20190107"
         
         
-        t.Execute(w,orderlist)
+        err := t.Execute(w,Orderlist)
+        fmt.Println("-----------------------",err)
     }else {
         r.ParseForm()
         orderId := r.PostForm["orderId"]
