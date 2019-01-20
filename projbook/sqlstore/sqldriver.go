@@ -26,6 +26,9 @@ func init() {
 	defer db.Close()
 	
 }
+func (dbw *DbWorker) QueryAll() () (data map[string]model.orderItem){
+	
+}
 func (dbw *DbWorker) Save(orderid,orderuser ,ordertype string) (err error){
 	db,err := sql.Open("mysql",
 	"root:12345678@tcp(localhost:3306)/order1")

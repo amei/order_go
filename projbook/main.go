@@ -44,6 +44,23 @@ func OrderList(w http.ResponseWriter,r *http.Request) {
         fmt.Println("submit body:",orderId,ordertype,order_person)
         dbw := &sqlstore.DbWorker{}
         dbw.Save(orderId[0],order_person[0],ordertype[0])
+        t, _ := template.ParseFiles("./views/orderinfo.gtpl")
+     
+
+        Orderlist := [2]OrderItem{}
+        Orderlist[0].Order_id="9999999999"
+        Orderlist[0].Order_type="order_jd"
+        Orderlist[0].Order_person = "chenmei"
+        Orderlist[0].Order_time = "20190107"
+
+        Orderlist[1].Order_id="22222222"
+        Orderlist[1].Order_type="order_jd"
+        Orderlist[1].Order_person = "chenmei"
+        Orderlist[1].Order_time = "20190107"
+        
+        
+        err := t.Execute(w,Orderlist)
+        fmt.Println("-----------------------",err)
     }
 }
 func Login(w http.ResponseWriter, r *http.Request) {
