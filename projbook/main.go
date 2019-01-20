@@ -7,7 +7,7 @@ import (
     "log"
     "html/template"
    // "io/ioutil"
-    //sqlstore "order_go/projbook/sqlstore"
+    sqlstore "order_go/projbook/sqlstore"
 )
 type OrderItem struct {
     Order_id string
@@ -42,8 +42,8 @@ func OrderList(w http.ResponseWriter,r *http.Request) {
         order_person := r.PostForm["order_person"]
 
         fmt.Println("submit body:",orderId,ordertype,order_person)
-       // dbw := &sqlstore.DbWorker{}
-        //dbw.Save(orderId,order_person,ordertype)
+        dbw := &sqlstore.DbWorker{}
+        dbw.Save(orderId[0],order_person[0],ordertype[0])
     }
 }
 func Login(w http.ResponseWriter, r *http.Request) {
