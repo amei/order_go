@@ -8,32 +8,24 @@ import (
     "html/template"
    // "io/ioutil"
     sqlstore "order_go/projbook/sqlstore"
+    //"order_go/projbook/model"
 )
-type OrderItem struct {
+/*type OrderItem struct {
     Order_id string
     Order_type string
     Order_person string
     Order_time string
-}
+}*/
 func OrderList(w http.ResponseWriter,r *http.Request) {
     fmt.Println("OrderList method ",r.Method);
     if r.Method == "GET" {
         t, _ := template.ParseFiles("./views/orderinfo.gtpl")
+        dbw := &sqlstore.DbWorker{}
      
+        data := dbw.QueryAll()
 
-        Orderlist := [2]OrderItem{}
-        Orderlist[0].Order_id="1111111"
-        Orderlist[0].Order_type="order_jd"
-        Orderlist[0].Order_person = "chenmei"
-        Orderlist[0].Order_time = "20190107"
-
-        Orderlist[1].Order_id="22222222"
-        Orderlist[1].Order_type="order_jd"
-        Orderlist[1].Order_person = "chenmei"
-        Orderlist[1].Order_time = "20190107"
         
-        
-        err := t.Execute(w,Orderlist)
+        err := t.Execute(w,data)
         fmt.Println("-----------------------",err)
     }else {
         r.ParseForm()
@@ -46,20 +38,9 @@ func OrderList(w http.ResponseWriter,r *http.Request) {
         dbw.Save(orderId[0],order_person[0],ordertype[0])
         t, _ := template.ParseFiles("./views/orderinfo.gtpl")
      
-
-        Orderlist := [2]OrderItem{}
-        Orderlist[0].Order_id="9999999999"
-        Orderlist[0].Order_type="order_jd"
-        Orderlist[0].Order_person = "chenmei"
-        Orderlist[0].Order_time = "20190107"
-
-        Orderlist[1].Order_id="22222222"
-        Orderlist[1].Order_type="order_jd"
-        Orderlist[1].Order_person = "chenmei"
-        Orderlist[1].Order_time = "20190107"
-        
-        
-        err := t.Execute(w,Orderlist)
+        data := dbw.QueryAll()
+       
+        err := t.Execute(w,data)
         fmt.Println("-----------------------",err)
     }
 }

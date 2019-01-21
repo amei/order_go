@@ -23,7 +23,7 @@
 <input type="submit" name="submit" id="submit" value="提交" />
 </form>
 <p>&nbsp;</p>
-<table width="780" height="242" border="1">
+<table width="780" height="30" border="1">
   <tr>
     <th scope="col">订单号</th>
     <th scope="col">订单类型</th>
@@ -32,10 +32,10 @@
   </tr>
   {{ range .}}
   <tr>
-    <td> {{.Order_id }} </td>
-    <td> {{.Order_type }} </td>
-    <td> {{.Order_person}} </td>
-    <td> {{.Order_time }} </td>
+    <td> {{.OrderId }} </td>
+    <td> {{.OrderType }} </td>
+    <td> {{.OrderUser}} </td>
+    <td> {{.CreateTime}}</td>
   </tr>
   {{ end }}
 </table>
