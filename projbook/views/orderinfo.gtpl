@@ -28,7 +28,8 @@
     <th scope="col">订单号</th>
     <th scope="col">订单类型</th>
     <th scope="col">订单提交人</th>
-    <th scope="col"><p>提交日前</p></th>
+    <th scope="col">提交日期</th>
+    <th scope="col">订单状态</th>
   </tr>
   {{ range .}}
   <tr>
@@ -36,6 +37,12 @@
     <td> {{.OrderType }} </td>
     <td> {{.OrderUser}} </td>
     <td> {{.CreateTime}}</td>
+    <td> 
+    <select name="status" id="status">
+  <option value="order_submmit">已提交</option>
+  <option value="order_finish">已结款</option>
+</select>
+</td>
   </tr>
   {{ end }}
 </table>
