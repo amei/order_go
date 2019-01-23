@@ -29,6 +29,7 @@ func OrderList(w http.ResponseWriter,r *http.Request) {
         fmt.Println("-----------------------",err)
     }else {
         r.ParseForm()
+        fmt.Println("formid = ",r.Form["id"])
         orderId := r.PostForm["orderId"]
         ordertype := r.PostForm["ordertype"]
         order_person := r.PostForm["order_person"]

@@ -38,10 +38,13 @@
     <td> {{.OrderUser}} </td>
     <td> {{.CreateTime}}</td>
     <td> 
+    <form id="form_status" name="form_status" method="post" action="/list">
     <select name="status" id="status">
-  <option value="order_submmit">已提交</option>
-  <option value="order_finish">已结款</option>
-</select>
+    <option value="order_submmit">已提交</option>
+    <option value="order_finish">已结款</option>
+    </select>
+    <input type="submit" value="保存" id="submit_status" />
+    </form>
 </td>
   </tr>
   {{ end }}
