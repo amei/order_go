@@ -4,11 +4,12 @@ import (
     "fmt"
     "net/http"
     //"strings"
+    "strconv"
     "log"
     "html/template"
    // "io/ioutil"
     sqlstore "order_go/projbook/sqlstore"
-    //"order_go/projbook/model"
+    "order_go/projbook/model"
 )
 /*type OrderItem struct {
     Order_id string
@@ -29,20 +30,33 @@ func OrderList(w http.ResponseWriter,r *http.Request) {
         fmt.Println("-----------------------",err)
     }else {
         r.ParseForm()
-        fmt.Println("formid = ",r.Form["id"])
-        orderId := r.PostForm["orderId"]
-        ordertype := r.PostForm["ordertype"]
-        order_person := r.PostForm["order_person"]
-
-        fmt.Println("submit body:",orderId,ordertype,order_person)
+        //var t  *Template
+        fmt.Println("formid = ",r.Form)
+        action := r.Form["action"]
+        fmt.Println("form action:",action)
         dbw := &sqlstore.DbWorker{}
-        dbw.Save(orderId[0],order_person[0],ordertype[0])
+        if action[0] == "new" {
+            orderId := r.PostForm["orderId"]
+            ordertype := r.PostForm["ordertype"]
+            order_person := r.PostForm["order_person"]
+            //order_status := r.PostForm["status"]
+            fmt.Println("submit body:",orderId,ordertype,order_person)
+            
+            dbw.Save(orderId[0],order_person[0],ordertype[0],model.Status_summit)
+            
+        } else if action[0] == "status" {
+            order_status := r.PostForm["status"]
+            orderId := r.PostForm["orderid"]
+            fmt.Println("order id:  status :",orderId,order_status)
+            status,_:=strconv.Atoi(order_status[0]) 
+            dbw.SaveStatus(orderId[0],status)
+        }
         t, _ := template.ParseFiles("./views/orderinfo.gtpl")
-     
+         
         data := dbw.QueryAll()
-       
         err := t.Execute(w,data)
         fmt.Println("-----------------------",err)
+       
     }
 }
 func Login(w http.ResponseWriter, r *http.Request) {

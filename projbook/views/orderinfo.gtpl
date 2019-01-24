@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="/list">
+<form id="form1" name="form1" method="post" action="/list?action=new">
 订单号：
 <label for="orderId"></label>
 <input type="text" name="orderId" id="orderId" />
@@ -38,10 +38,11 @@
     <td> {{.OrderUser}} </td>
     <td> {{.CreateTime}}</td>
     <td> 
-    <form id="form_status" name="form_status" method="post" action="/list">
+    <form id="form_status" name="form_status" method="post" action="/list?action=status">
+    <input type='hidden' name='orderid' value={{.OrderId}} >
     <select name="status" id="status">
-    <option value="order_submmit">已提交</option>
-    <option value="order_finish">已结款</option>
+    <option value="0">已提交</option>
+    <option value="1">已结款</option>
     </select>
     <input type="submit" value="保存" id="submit_status" />
     </form>
