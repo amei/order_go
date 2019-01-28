@@ -41,8 +41,8 @@
     <form id="form_status" name="form_status" method="post" action="/list?action=status">
     <input type='hidden' name='orderid' value={{.OrderId}} >
     <select name="status" id="status">
-    <option value="0">已提交</option>
-    <option value="1">已结款</option>
+    <option value="0"  {{if eq .Status 0 }} selected="selected" {{ end }}>已提交</option>
+    <option value="1" {{if eq .Status 1}} selected="selected" {{ end }}>已结款</option>
     </select>
     <input type="submit" value="保存" id="submit_status" />
     </form>

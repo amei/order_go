@@ -60,7 +60,7 @@ func (dbw *DbWorker) QueryAll() (data []model.OrderItem) {
 				item.Status = orderstatus
 				//datamap[orderid] = item
 				data = append(data, item)
-				fmt.Println("orderid:%s",orderid)
+				fmt.Println("order:",orderid,orderstatus)
 			}
 		}
 	}
@@ -106,11 +106,8 @@ func (dbw *DbWorker) SaveStatus(orderid string,status int) (err error){
 	if err != nil {
 		fmt.Println("create error err",err)
 	}
-	_, err = db.Exec(
-		"update orderlist (orderid,status) VALUES(?,?)",
-		orderid,
-		status,
-	)
+	updatesql := fmt.Sprintf("update orderlist set status=%d where orderid='%s'",status,orderid)
+	_, err = db.Exec(updatesql)
 	if err != nil {
 		fmt.Println("insert error err",err)
 	}
